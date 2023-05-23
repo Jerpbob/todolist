@@ -1,6 +1,12 @@
 from flask import Flask
+from config import Configuration
+from flask_alchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
+app.config.from_object(Configuration)
+db = SQLAlchemy(app)
+migrate = Migrate(app,db)
 
-from core import views
+from core import views, models
 
